@@ -1,7 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AirportFlights.Core.Data;
+using AirportFlights.Infra.Fake;
+using AirportFlights.Infra.Services;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
@@ -9,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace WebApplicationBasic
+namespace AirportFlights.Web
 {
     public class Startup
     {
@@ -26,10 +28,20 @@ namespace WebApplicationBasic
         public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
             services.AddMvc();
+
+            var builder = new ContainerBuilder();
+
+            builder.RegisterType<InMemoryUnitOfWork>().As<IUnitOfWork>().SingleInstance();
+            builder.RegisterType<FlightDataService>().As<IFlightDataService>().InstancePerDependency();
+
+            builder.Populate(services);
+
+            var container = builder.Build();
+            return container.Resolve<IServiceProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
