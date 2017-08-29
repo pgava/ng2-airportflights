@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
+import { Router } from '@angular/router';
 import { Gate } from '../../../api/GateApi';
 import { Flight } from '../../../api/FlightApi';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'airportFlights',
@@ -16,7 +16,6 @@ export class AirportFlightsComponent {
     }
 
     constructor(http: Http, @Inject('ORIGIN_URL') originUrl: string, private router: Router) {
-        debugger;
         http.get(originUrl + '/api/gate/GetAllFlights').subscribe(result => {
             this.gates = result.json() as Gate[];
         });
