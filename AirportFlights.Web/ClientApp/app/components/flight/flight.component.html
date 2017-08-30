@@ -1,52 +1,57 @@
 
 <form>
     <h1>Flight</h1>
-    <div class="form-group col-md-4">
-        <label for="flightNumber">flight Number</label>
-        <div className="field">
-            <input
-                type="text"
-                id="flightNumber"
-                name="flightNumber"
-                class="form-control"
-                placeholder="Flight Number"
-                [(ngModel)]="flight.flightNumber"
-            />            
+    <div *ngIf="flight">
+        <div class="form-group col-md-4">
+            <label for="flightNumber">flight Number</label>
+            <div className="field">
+                <input
+                    type="text"
+                    id="flightNumber"
+                    name="flightNumber"
+                    class="form-control"
+                    placeholder="Flight Number"
+                    [(ngModel)]="flight.flightNumber"
+                />            
+            </div>
+        </div>
+        <div class="form-group col-md-12">
+            <label for="description">Description</label>
+            <div className="field">
+                <input
+                    type="text"
+                    id="description"
+                    name="description"
+                    class="form-control"
+                    placeholder="Description"
+                    [(ngModel)]="flight.description"
+                />            
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="arrival">Arrival</label>
+            <div className="field">
+                <input type="text"
+                       id="arrival"
+                       name="arrival"
+                       class="form-control"
+                       placeholder="Arrival"
+                       [(ngModel)]="flight.arrival" />
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="departure">Departure</label>
+            <div className="field">
+                <input type="text"
+                       id="departure"
+                       name="departure"
+                       class="form-control"
+                       placeholder="Departure"
+                       [(ngModel)]="flight.departure" />
+            </div>
         </div>
     </div>
-    <div class="form-group col-md-12">
-        <label for="description">Description</label>
-        <div className="field">
-            <input
-                type="text"
-                id="description"
-                name="description"
-                class="form-control"
-                placeholder="Description"
-                [(ngModel)]="flight.description"
-            />            
-        </div>
-    </div>
-    <div class="form-group col-md-4">
-        <label for="arrival">Arrival</label>
-        <div className="field">
-            <input type="text"
-                   id="arrival"
-                   name="arrival"
-                   class="form-control"
-                   placeholder="Arrival"
-                   [(ngModel)]="flight.arrival" />
-        </div>
-    </div>
-    <div class="form-group col-md-4">
-        <label for="departure">Departure</label>
-        <div className="field">
-            <input type="text"
-                   id="departure"
-                   name="departure"
-                   class="form-control"
-                   placeholder="Departure"
-                   [(ngModel)]="flight.departure" />
-        </div>
+    <div *ngIf="!flight">
+        Loading...
     </div>
 </form>

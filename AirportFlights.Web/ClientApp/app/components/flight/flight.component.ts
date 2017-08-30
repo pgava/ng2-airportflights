@@ -1,5 +1,7 @@
+import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Rx';
 import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -17,15 +19,9 @@ export class FlightComponent {
         
     }
 
-    getFlight(id: any): Promise<Flight> {
-        debugger;
-        //this.http.get(this.rootUrl + `/api/flight?id=${id}`).subscribe(result => {
-        //    return result.json() as Flight;
-        //});
+    getFlight(id: string): Observable<Flight> {
         return this.http.get(this.rootUrl + `/api/flight?id=${id}`)
-            .toPromise()
-            .then(response => {
-                debugger;
+            .map(response => {
                 let res = response.json() as Flight;
                 return response.json() as Flight;
             });
