@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Flight } from '../../../api/FlightApi';
+import { Flight, FlightService } from '../../api/flight.service';
 
 @Component({
     selector: 'flight',
@@ -16,25 +16,25 @@ export class FlightComponent {
     public rootUrl: string;
 
     onSave(flight: Flight) {
-        
-    }
-
-    getFlight(id: string): Observable<Flight> {
-        return this.http.get(this.rootUrl + `/api/flight?id=${id}`)
-            .map(response => {
-                let res = response.json() as Flight;
-                return response.json() as Flight;
-            });
+        this.flightService.saveFlight(flight)
+            .subscribe(data => {
+                // TODO
+            },
+            error => {
+                // TODO
+           });
     }
 
     ngOnInit() {
         this.route.paramMap
             .switchMap((params: ParamMap) =>
-                this.getFlight(params.get('id')))
+                this.flightService.getFlight(params.get('id')))
             .subscribe((flight: Flight) => this.flight = flight);
     }
 
-    constructor(private http: Http, @Inject('ORIGIN_URL') originUrl: string, private router: Router, private route: ActivatedRoute) {
+    constructor(private http: Http, @Inject('ORIGIN_URL') originUrl: string, private router: Router, private route: ActivatedRoute,
+        private flightService: FlightService) {
+
         this.rootUrl = originUrl;
     }
     

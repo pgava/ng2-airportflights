@@ -50,6 +50,9 @@
                        [(ngModel)]="flight.departure" />
             </div>
         </div>
+        <div class="form-group col-md-12">
+            <input type="submit" class="btn btn-primary" (click)="onSave(flight)"/>
+        </div>
     </div>
     <div *ngIf="!flight">
         Loading...

@@ -10,6 +10,8 @@ import { CounterComponent } from './components/counter/counter.component';
 import { AirportFlightsComponent } from './components/airport-flights/airport-flights.component';
 import { FlightComponent } from './components/flight/flight.component';
 
+// TODO: FormsModule should NOT be here
+
 export const sharedConfig: NgModule = {
     bootstrap: [ AppComponent ],
     declarations: [

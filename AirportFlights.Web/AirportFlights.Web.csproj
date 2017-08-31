@@ -25,9 +25,6 @@
     <ProjectReference Include="..\AirportFlights.Core\AirportFlights.Core.csproj" />
     <ProjectReference Include="..\AirportFlights.Infra\AirportFlights.Infra.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ClientApp\api\" />
-  </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
     <Exec Command="npm install" />

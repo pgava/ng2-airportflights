@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
-import { Gate } from '../../../api/GateApi';
-import { Flight } from '../../../api/FlightApi';
+import { Gate, AirportFlightsService } from '../../api/airport-flights.service';
+import { Flight } from '../../api/flight.service';
 
 @Component({
     selector: 'airportFlights',
@@ -15,10 +15,15 @@ export class AirportFlightsComponent {
         this.router.navigate(['/flight', flight.flightId]);
     }
 
-    constructor(http: Http, @Inject('ORIGIN_URL') originUrl: string, private router: Router) {
-        http.get(originUrl + '/api/gate/GetAllFlights').subscribe(result => {
-            this.gates = result.json() as Gate[];
-        });
+    //constructor(http: Http, @Inject('ORIGIN_URL') originUrl: string, private router: Router) {
+    //    http.get(originUrl + '/api/gate/GetAllFlights').subscribe(result => {
+    //        this.gates = result.json() as Gate[];
+    //    });
+    //}
+
+    constructor(private router: Router, private airportFlightsService: AirportFlightsService) {
+        airportFlightsService.getAllFlights()
+            .subscribe((gates: Gate[]) => this.gates = gates);
     }
 }
 
